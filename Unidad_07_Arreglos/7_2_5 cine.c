@@ -6,13 +6,8 @@ void mostrar(char[][9],int,int );
 void reserva(char[][9]);
 int ContarLetras(char[][9], char, int, int );
 void MostrarFilasVacias(char[][9], int, int );
-<<<<<<< HEAD
-int ContarReservasXFila(char[][9],int[], int, int );
-int ContarReservasXColumnas(char[][9],int[], int, int );
-=======
 void ContarReservasXFila(char[][9],int[], int, int );
 void ContarReservasXColumnas(char[][9],int[], int, int );
->>>>>>> 855ad7f (Consultas 2022)
 int ValorMaximo(int [], int);
 void MostrarValor(int[], int, int);
 void Ordenar (int[], int[], int);
@@ -20,12 +15,8 @@ void MostrarOcupacionButacas(int[], int[], int);
 
 int main()
 {
-<<<<<<< HEAD
-    int reservasXfila[12], reservasXColumna[9], maximo, numerosButaca[9]={8,6,4,2,1,3,5,7,9};
-=======
     int reservasXfila[12], reservasXColumna[9], maximo; 
     int numerosButaca[] = {8,6,4,2,1,3,5,7,9};
->>>>>>> 855ad7f (Consultas 2022)
 
 
     char M[12][9];
@@ -80,11 +71,7 @@ void Ordenar (int vo[], int vi[], int ce)
             }
 }
 
-<<<<<<< HEAD
-int ContarReservasXColumnas(char M[][9], int v[], int cf, int cc)
-=======
 void ContarReservasXColumnas(char M[][9], int v[], int cf, int cc)
->>>>>>> 855ad7f (Consultas 2022)
 {
     int f,c, cont=0;
     for(c=0;c<cc;c++)
@@ -114,11 +101,7 @@ void MostrarValor(int v[], int valor, int ce)
             printf("\n%d", i+1);
 }
 
-<<<<<<< HEAD
-int ContarReservasXFila(char M[][9], int v[], int cf, int cc)
-=======
 void ContarReservasXFila(char M[][9], int v[], int cf, int cc)
->>>>>>> 855ad7f (Consultas 2022)
 {
     int f,c, cont=0;
     for(f=0;f<cf;f++)
@@ -232,11 +215,7 @@ void reserva(char M[][9])
          if (M [f] [c]== 'R')
          {
             printf (" *********EL LUGAR ESTA OCUPADO - Seleccione otro **********");
-<<<<<<< HEAD
-            getch();
-=======
             getchar();
->>>>>>> 855ad7f (Consultas 2022)
          }
          else
          {

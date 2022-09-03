@@ -9,10 +9,7 @@ b. Mostrar el listado de alumnos ordenado alfabéticamente de menor a mayor.*/
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-<<<<<<< HEAD
-=======
 
->>>>>>> 855ad7f (Consultas 2022)
 int strcmpi(char* s1, char* s2){
     int i;
      
@@ -144,8 +141,4 @@ void leerTexto (char texto[], int largo)
 			i++;
 	}
 }
-<<<<<<< HEAD
 //---------------------------------------------------------------------
-=======
-//---------------------------------------------------------------------
->>>>>>> 855ad7f (Consultas 2022)
