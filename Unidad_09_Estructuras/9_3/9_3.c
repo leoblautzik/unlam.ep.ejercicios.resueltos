@@ -28,11 +28,19 @@ void clean_stdin(void)
         c = getchar();
     } while (c != '\n' && c != EOF);
 }
+typedef struct
+{
+    int dia;
+    int mes;
+    int anio;
+}Fecha;
+
 
 typedef struct
 {
     int DNI;
     char Apenom[81];
+    Fecha fenac;
     int notas[2];
     float Promedio;
 }Alumno;
@@ -48,16 +56,30 @@ int leerNota();
 
 int main()
 {
+    Alumno ezequiel;
+
+    ezequiel.DNI = 333333333;
+    strcpy(ezequiel.Apenom, "ezequiel"); 
+    ezequiel.fenac.dia = 11;
+    ezequiel.fenac.mes = 10;
+    ezequiel.fenac.anio = 2000;
+    ezequiel.notas[0] = 4;
+    ezequiel.notas[1] = 6;
+    ezequiel.Promedio = (float)(ezequiel.notas[0] + ezequiel.notas[1])/2;
+
+
     int cantidadDeAlumnos = 0;
     Alumno alumnos[80];
+    alumnos[0] = ezequiel;
+
     cantidadDeAlumnos = ingreso(alumnos, MAX_ALUMNOS);
-    
+
     if(cantidadDeAlumnos > 0)
     {
         resultado(alumnos, cantidadDeAlumnos);
         informePromo(alumnos, cantidadDeAlumnos);
     }
-    
+
     return 0;
 }
 
@@ -151,36 +173,36 @@ int buscar(Alumno alumnos[], int dni, int cant)
 void leerApenom(char texto[], int largo)
 {
     clean_stdin();
-	do
-	{
-		printf("Ingrese Apellido, Nombre: ");
-		leerTexto(texto,largo);
-	}while(strcmp(texto,"")==0);
+    do
+    {
+        printf("Ingrese Apellido, Nombre: ");
+        leerTexto(texto,largo);
+    }while(strcmp(texto,"")==0);
 }
-                                                                 
+
 void leerTexto (char texto[], int largo)                                        
 {                                                                               
-     int i;                                                                      
-     fgets(texto, largo, stdin);                                                 
-     i=0;                                                                        
-     while (texto[i]!='\0')                                                      
-     {                                                                           
-         if (texto[i]=='\n')                                                     
-             texto[i]='\0';                                                      
-         else                                                                                                                      
+    int i;                                                                      
+    fgets(texto, largo, stdin);                                                 
+    i=0;                                                                        
+    while (texto[i]!='\0')                                                      
+    {                                                                           
+        if (texto[i]=='\n')                                                     
+            texto[i]='\0';                                                      
+        else                                                                                                                      
             i++;                                                                
-     }                                                                           
+    }                                                                           
 }            
 
 int leerNota()
 {
-	int nota = 0;
-	int error = 0;
+    int nota = 0;
+    int error = 0;
     do
-	{   if (error)
-            printf("Nota invalida, ingrese nuevamente: ");  
-		scanf("%d", &nota);
+    {   if (error)
+        printf("Nota invalida, ingrese nuevamente: ");  
+        scanf("%d", &nota);
         error = 1;
-	}while(nota < 1 || nota > 10);
-	return nota;
+    }while(nota < 1 || nota > 10);
+    return nota;
 }
