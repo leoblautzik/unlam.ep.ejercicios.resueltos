@@ -21,11 +21,11 @@ int main()
     {
         edad = anioActual - anioNacimiento;
     }
-    else 
+    else
     {
         edad = anioActual - anioNacimiento - 1;
     }
-    printf("La edad es: %d\n", edad) 
+    printf("La edad es: %d\n", edad);
 
     edad = anioActual - anioNacimiento;
     if(mesActual <= mesNacimiento)
