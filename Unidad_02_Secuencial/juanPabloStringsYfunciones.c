@@ -47,10 +47,17 @@ int main()
 int ingresarDatoValido(int inferior, int superiror, char mensaje [])
 {
     int nota;
+    int flag = 0;
     do
     {
-        printf("%s",mensaje);
+        if(flag !=0)
+        {
+            printf("Dato fuera del rango [%d, %d].  %s", inferior, superiror, mensaje);
+        }else { 
+            printf("%s",mensaje);
+        }
         scanf("%d", &nota);
+        flag = 1;
 
     }while(nota < inferior || nota > superiror);
 

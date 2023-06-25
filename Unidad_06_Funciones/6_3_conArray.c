@@ -3,11 +3,11 @@
 
 int leerParticipante();
 int CUADRANTE (float,float);
-int PUNTAJE (int,int,int,int,int);
+int PUNTAJE (int[]);
 
 int main()
 {
-    int participante, cuad, cuad0, cuad1, cuad2, cuad3, cuad4, centro=0, error;
+    int participante,centro, error;
     float x,y;
     int ganador, puntajeParticipante, maxPuntaje = 0;
     int flagMax = 0;
@@ -16,9 +16,8 @@ int main()
     
     while(participante >= 0)
     {
-        cuad0 = cuad1 = cuad2 = cuad3 = cuad4 = 0;
         printf("Ingrese los disparos del participante Nro: %d\n", participante);
-        
+        int cuadrantes[] = {0,0,0,0,0}; 
         for(int i=0; i<3; i++)
         {
             error = 0;
@@ -33,24 +32,11 @@ int main()
 
             }while(x*y==0 && x!=y);
         
-            cuad=CUADRANTE(x,y);
-            switch (cuad)
-            {
-                case 0: cuad0 ++;
-                        break;
-                case 1: cuad1 ++;
-                        break;
-                case 2: cuad2 ++;
-                        break;
-                case 3: cuad3 ++;
-                        break;
-                case 4: cuad4 ++;
-                        break;
-            }
+            cuadrantes[CUADRANTE(x,y)]++;
         }// cierro el for de tiros por participante. 
         
-        centro += cuad0;
-        puntajeParticipante = PUNTAJE(cuad0, cuad1, cuad2, cuad3, cuad4);
+        centro += cuadrantes[0];
+        puntajeParticipante = PUNTAJE(cuadrantes);
 
         if(flagMax == 0 || puntajeParticipante > maxPuntaje)
         {
@@ -60,7 +46,8 @@ int main()
         }
 
         printf("Puntaje: %d\n", puntajeParticipante);
-        printf("Centro: %d\t Cuad_1: %d\t Cuad_2: %d\t Cuad_3: %d\t Cuad_4: %d\n\n", cuad0,cuad1,cuad2,cuad3,cuad4);
+        printf("Centro: %d\t Cuad_1: %d\t Cuad_2: %d\t Cuad_3: %d\t Cuad_4: %d\n\n", 
+                cuadrantes[0],cuadrantes[1],cuadrantes[2],cuadrantes[3],cuadrantes[4]);
         
         participante = leerParticipante();
     } // fin while
@@ -101,9 +88,11 @@ int CUADRANTE (float x, float y)
     return cuadrante;
 }
 
-int PUNTAJE (int cuad0, int cuad1,int cuad2,int cuad3,int cuad4)
+int PUNTAJE (int cuadrantes[])
 {
-    return (cuad1+cuad2)*50 + (cuad4+cuad3)*40 + cuad0*100;
+    return (cuadrantes[1] + cuadrantes[2]) * 50 + 
+        (cuadrantes[4] + cuadrantes[3]) * 40 + 
+        cuadrantes[0] * 100;
 }
 
 
