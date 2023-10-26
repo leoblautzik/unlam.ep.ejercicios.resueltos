@@ -9,135 +9,169 @@
 #include <stdio.h>
 #include <string.h>
 
-int strcmpi(char *s1, char *s2) {
+int
+strcmpi (char *s1, char *s2)
+{
   int i;
 
-  if (strlen(s1) != strlen(s2))
+  if (strlen (s1) != strlen (s2))
     return -1;
 
-  for (i = 0; i < strlen(s1); i++) {
-    if (toupper(s1[i]) != toupper(s2[i]))
-      return s1[i] - s2[i];
-  }
+  for (i = 0; i < strlen (s1); i++)
+    {
+      if (toupper (s1[i]) != toupper (s2[i]))
+        return s1[i] - s2[i];
+    }
   return 0;
 }
 
-void leerTexto(char[], int);
-void leerYvalidarNombre(char[], int, char[]);
-int leerYvalidarDNI();
-int cargarAlumnos(char[][21], int[], int);
-int buscarNombre(char[][21], char[], int);
-void buscarAlumnos(char[][21], int[], int);
-void ordenarAlumnos(char[][21], int[], int);
-void mostrarAlumnos(char[][21], int[], int);
+void leerTexto (char[], int);
+void leerYvalidarNombre (char[], int, char[]);
+int leerYvalidarDNI ();
+int cargarAlumnos (char[][21], int[], int);
+int buscarNombre (char[][21], char[], int);
+void buscarAlumnos (char[][21], int[], int);
+void ordenarAlumnos (char[][21], int[], int);
+void mostrarAlumnos (char[][21], int[], int);
 
-int main() {
+int
+main ()
+{
   int DNIs[50], cantAlumnos;
   char nombres[50][21];
-  cantAlumnos = cargarAlumnos(nombres, DNIs, 50);
-  if (cantAlumnos > 0) {
-    buscarAlumnos(nombres, DNIs, cantAlumnos);
-    ordenarAlumnos(nombres, DNIs, cantAlumnos);
-    mostrarAlumnos(nombres, DNIs, cantAlumnos);
-  }
-  printf("\nBye!!");
+  cantAlumnos = cargarAlumnos (nombres, DNIs, 50);
+  if (cantAlumnos > 0)
+    {
+      buscarAlumnos (nombres, DNIs, cantAlumnos);
+      ordenarAlumnos (nombres, DNIs, cantAlumnos);
+      mostrarAlumnos (nombres, DNIs, cantAlumnos);
+    }
+  printf ("\nBye!!");
 }
 //---------------------------------------------------------------------
-int cargarAlumnos(char nombres[][21], int DNIs[], int tamMax) {
+int
+cargarAlumnos (char nombres[][21], int DNIs[], int tamMax)
+{
   int cantAlumnos = 0;
   char nombre[21] = "";
   char mensaje[] = "Ingrese el nombre: ";
 
-  leerYvalidarNombre(nombre, 21, mensaje);
-  while (strcmpi(nombre, "FIN") != 0 && cantAlumnos < tamMax) {
-    DNIs[cantAlumnos] = leerYvalidarDNI();
-    strcpy(nombres[cantAlumnos], nombre);
-    cantAlumnos++;
-    leerYvalidarNombre(nombre, 21, mensaje);
-  }
+  leerYvalidarNombre (nombre, 21, mensaje);
+  while (strcmpi (nombre, "FIN") != 0 && cantAlumnos < tamMax)
+    {
+      DNIs[cantAlumnos] = leerYvalidarDNI ();
+      strcpy (nombres[cantAlumnos], nombre);
+      cantAlumnos++;
+      leerYvalidarNombre (nombre, 21, mensaje);
+    }
   return cantAlumnos;
 }
 //---------------------------------------------------------------------
-void mostrarAlumnos(char nombres[][21], int DNIs[], int cantAlumnos) {
-  printf("Nombre  DNI\n");
-  for (int i = 0; i < cantAlumnos; i++) {
-    printf("%s\t%d\n", nombres[i], DNIs[i]);
-  }
+void
+mostrarAlumnos (char nombres[][21], int DNIs[], int cantAlumnos)
+{
+  printf ("Nombre  DNI\n");
+  for (int i = 0; i < cantAlumnos; i++)
+    {
+      printf ("%s\t%d\n", nombres[i], DNIs[i]);
+    }
 }
 //---------------------------------------------------------------------
-int buscarNombre(char nombres[][21], char nombreAbuscar[21], int cantAlumnos) {
+int
+buscarNombre (char nombres[][21], char nombreAbuscar[21], int cantAlumnos)
+{
   int pos = -1, i = 0;
-  while (pos == -1 && i < cantAlumnos) {
-    if (strcmp(nombreAbuscar, nombres[i]) == 0)
-      pos = i;
-    else
-      i++;
-  }
+  while (pos == -1 && i < cantAlumnos)
+    {
+      if (strcmp (nombreAbuscar, nombres[i]) == 0)
+        pos = i;
+      else
+        i++;
+    }
   return pos;
 }
 //---------------------------------------------------------------------
-void buscarAlumnos(char nombres[][21], int DNIs[], int cantAlumnos) {
+void
+buscarAlumnos (char nombres[][21], int DNIs[], int cantAlumnos)
+{
   int posDNI = -1;
   char nombre[21] = "";
   char mensaje[] = "Ingrese el nombre a buscar: ";
-  leerYvalidarNombre(nombre, 21, mensaje);
-  while (strcmpi(nombre, "NOBUSCARMAS") != 0) {
-    posDNI = buscarNombre(nombres, nombre, cantAlumnos);
+  leerYvalidarNombre (nombre, 21, mensaje);
+  while (strcmpi (nombre, "NOBUSCARMAS") != 0)
+    {
+      posDNI = buscarNombre (nombres, nombre, cantAlumnos);
 
-    if (posDNI > -1)
-      printf("DNI:%d\n", DNIs[posDNI]);
-    else
-      printf("Nombre no encontrado\n");
+      if (posDNI > -1)
+        printf ("DNI:%d\n", DNIs[posDNI]);
+      else
+        printf ("Nombre no encontrado\n");
 
-    leerYvalidarNombre(nombre, 21, mensaje);
-  }
+      leerYvalidarNombre (nombre, 21, mensaje);
+    }
 }
 //---------------------------------------------------------------------
-void ordenarAlumnos(char nombres[][21], int DNIs[], int cant) {
+void
+ordenarAlumnos (char nombres[][21], int DNIs[], int cant)
+{
   int i, j;
   char str_aux[21];
   int dni_aux;
-  for (i = 0; i < cant - 1; i++) {
-    for (j = 0; j < cant - 1 - i; j++) {
-      if (strcmp(nombres[j], nombres[j + 1]) > 0) {
-        strcpy(str_aux, nombres[j]);
-        strcpy(nombres[j], nombres[j + 1]);
-        strcpy(nombres[j + 1], str_aux);
+  for (i = 0; i < cant - 1; i++)
+    {
+      for (j = 0; j < cant - 1 - i; j++)
+        {
+          if (strcmp (nombres[j], nombres[j + 1]) > 0)
+            {
+              strcpy (str_aux, nombres[j]);
+              strcpy (nombres[j], nombres[j + 1]);
+              strcpy (nombres[j + 1], str_aux);
 
-        dni_aux = DNIs[j];
-        DNIs[j] = DNIs[j + 1];
-        DNIs[j + 1] = dni_aux;
-      }
+              dni_aux = DNIs[j];
+              DNIs[j] = DNIs[j + 1];
+              DNIs[j + 1] = dni_aux;
+            }
+        }
     }
-  }
 }
 //---------------------------------------------------------------------
-void leerTexto(char texto[], int largo) {
+void
+leerTexto (char texto[], int largo)
+{
   int i;
-  fgets(texto, largo, stdin);
+  fgets (texto, largo, stdin);
   i = 0;
-  while (texto[i] != '\0') {
-    if (texto[i] == '\n')
-      texto[i] = '\0';
-    else
-      i++;
-  }
+  while (texto[i] != '\0')
+    {
+      if (texto[i] == '\n')
+        texto[i] = '\0';
+      else
+        i++;
+    }
 }
 //---------------------------------------------------------------------
-void leerYvalidarNombre(char texto[], int largo, char mensaje[]) {
-  do {
-    printf("%s", mensaje);
-    leerTexto(texto, largo);
-  } while (strcmp(texto, "") == 0);
+void
+leerYvalidarNombre (char texto[], int largo, char mensaje[])
+{
+  do
+    {
+      printf ("%s", mensaje);
+      leerTexto (texto, largo);
+    }
+  while (strcmp (texto, "") == 0);
 }
 
-int leerYvalidarDNI() {
+int
+leerYvalidarDNI ()
+{
   int dni = 0;
-  do {
-    printf("Ingrese el DNI: ");
-    scanf("%d", &dni);
-    getchar();
-  } while (dni < 5000000 || dni > 100000000);
+  do
+    {
+      printf ("Ingrese el DNI: ");
+      scanf ("%d", &dni);
+      getchar ();
+    }
+  while (dni < 5000000 || dni > 100000000);
 
   return dni;
 }
